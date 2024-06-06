@@ -1,0 +1,33 @@
+import pandas as pd
+import matplotlib.pyplot as plt
+df = pd.read_csv("Linear Regression - Sheet1.csv")
+
+m = 0
+c = 0
+def grad_m(df, m, c):
+    total_grad_m = 0.0
+    for i in range(df.shape[0]):
+        total_grad_m += (-2.0/df.shape[0])*df.iloc[i,0]*(df.iloc[i,1] - m*df.iloc[i,0] - c)
+    return total_grad_m
+
+def grad_c(df, m , c):
+    total_grad_c = 0.0
+    for i in range(df.shape[0]):
+        total_grad_c += (-2.0/df.shape[0])*(df.iloc[i, 1] - m * df.iloc[i, 0] - c)
+    return total_grad_c
+
+def train(x, slope, rate):
+    return x - rate*slope
+
+for i in range(1000):
+    m = train(m, grad_m(df,m,c), 3e-5)
+    c = train(c, grad_c(df,m,c), 0.01)
+
+plt.scatter(df["X"],df["Y"],color = "black")
+x_list = []
+y_list = []
+for i in range(1,301):
+    x_list.append(i)
+    y_list.append(m*i+c)
+plt.plot(x_list, y_list, color = "blue")
+plt.show()
