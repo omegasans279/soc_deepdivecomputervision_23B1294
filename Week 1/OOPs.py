@@ -7,7 +7,7 @@ class Complex:
         self.Im = y
     
     def display(self):
-        print("The complex number is =", self.Re, "+", str(self.Im) + "i")
+        print(f"The complex number is = {self.Re} + {self.Im}i")
 
     def add(self, z):
         return Complex(self.Re+z.Re, self.Im+z.Im)
